@@ -23,12 +23,14 @@ public class ProduitDAO implements Dao{
     }
 
     public Produit getByName(Produit produit){
-        Produit result;
-        EntityManager em = emf.createEntityManager();
-        result = em.createQuery("select i from Produit i where i.nom like :nom", Produit.class)
-                .setParameter("nom", produit.getNom())
-                .getResultList().get(0);
-        em.close();
+        Produit result = new Produit();
+        try {
+            EntityManager em = emf.createEntityManager();
+            result = em.createQuery("select i from Produit i where i.nom like :nom", Produit.class)
+                    .setParameter("nom", produit.getNom())
+                    .getResultList().get(0);
+            em.close();
+        } catch (Exception e) {}
         return result;
     }
 
