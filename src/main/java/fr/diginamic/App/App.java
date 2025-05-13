@@ -13,10 +13,11 @@ import java.util.List;
 public class App {
     public static void main(String[] args){
         List<ProduitDTO> listProduits = ExtraireCSV.convertAllStringsToDTO(ExtraireCSV.extractionCSV());
+        //List<ProduitDTO> listProduits2 = listProduits.subList(6376, listProduits.size());
         for(ProduitDTO produitDTO : listProduits){
             Produit produit = ExtractFromDTO.extractProduitFromDTO(produitDTO);
             ConnexionJPA.addProduit(produit);
-            Produit produitInstancié = new ProduitDAO().getByName(produit);
+            Produit produitInstancie = new ProduitDAO().getByName(produit);
             ConnexionJPA.addMultipleAdditif(produitDTO.getListeAdditif());
             ConnexionJPA.addMultipleAllergene(produitDTO.getListeAllergene());
             ConnexionJPA.addMultipleIngredient(produitDTO.getListeIngredient());
