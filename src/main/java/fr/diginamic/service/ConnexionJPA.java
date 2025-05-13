@@ -61,7 +61,32 @@ public class ConnexionJPA {
     public static void linkIngredientAndProduit(Produit p, List<Ingredient> list){
         for(Ingredient i : list){
             IngredientDAO idao = new IngredientDAO();
-
+            int ingredient_id = idao.getIdByName(i);
+            idao.linkIngredient(p.getId(), ingredient_id);
         }
+    }
+    public static void linkAllergeneAndProduit(Produit p, List<Allergene> list){
+        for(Allergene i : list){
+            AllergeneDAO idao = new AllergeneDAO();
+            int allergene_id = idao.getIdByName(i);
+            idao.linkAllergene(p.getId(), allergene_id);
+        }
+    }
+    public static void linkAdditifAndProduit(Produit p, List<Additif> list){
+        for(Additif i : list){
+            AdditifDAO idao = new AdditifDAO();
+            int additif_id = idao.getIdByName(i);
+            idao.linkAdditif(p.getId(), additif_id);
+        }
+    }
+    public static void linkMarqueAndProduit(Produit p, Marque m){
+        MarqueDAO mdao = new MarqueDAO();
+        int marque_id = mdao.getIdByName(m);
+        mdao.linkMarque(p.getId(), marque_id);
+    }
+    public static void linkCategorieAndProduit(Produit p, Categorie c){
+        CategorieDAO mdao = new CategorieDAO();
+        int categorie_id = mdao.getIdByName(c);
+        mdao.linkCategorie(p.getId(), categorie_id);
     }
 }

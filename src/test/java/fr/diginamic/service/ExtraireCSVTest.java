@@ -12,17 +12,15 @@ class ExtraireCSVTest {
 
     @org.junit.jupiter.api.Test
     void extractionCSV() {
-        List<String[]> res = new ExtraireCSV().extractionCSV();
+        List<String[]> res = ExtraireCSV.extractionCSV();
         assertFalse(res.isEmpty());
-        Arrays.stream(res.get(0)).toList().forEach(x -> System.out.println(x));
     }
     @org.junit.jupiter.api.Test
-    void convertStringToDTO(){
-        ExtraireCSV ecsv = new ExtraireCSV();
-        List<String[]> allLines = ecsv.extractionCSV();
+    void convertStringToDTO(){;
+        List<String[]> allLines = ExtraireCSV.extractionCSV();
         List<String> res = Arrays.stream(allLines.get(0)).toList();
-        ProduitDTO pdto = ecsv.convertStringsToDTO(res);
-        System.out.println(pdto.toString());
+        ProduitDTO pdto = ExtraireCSV.convertStringsToDTO(res);
+        assertNotNull(pdto);
     }
 
     @org.junit.jupiter.api.Test
@@ -33,6 +31,13 @@ class ExtraireCSVTest {
         ProduitDTO pdto = ecsv.convertStringsToDTO(res);
         ConnexionJPA.addIngredient((Ingredient) pdto.getListeIngredient().get(0));
         assertNotNull(new IngredientDAO().getById(pdto.getListeIngredient().get(0)));
+    }
+    @org.junit.jupiter.api.Test
+    void cleanString(){
+        String s = "Objet (description osef)";
+        assertEquals(ExtraireCSV.cleanString(s), "Objet");
+        s = "Objet : 25% Pomme au minimum*.";
+        assertEquals(ExtraireCSV.cleanString(s), "Objet");
     }
 
 }

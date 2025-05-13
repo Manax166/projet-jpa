@@ -77,7 +77,7 @@ public class ExtraireCSV {
         return resultList;
     }
 
-    private static String cleanString(String s) {
-        return s.replaceAll("%.*$", "").replaceAll("[0-9:.*%]", "").trim();
+    public static String cleanString(String s) {
+        return s.replaceAll("%.*$", "").replaceAll("\\(.*$", "").replaceAll("[0-9:.*%]", "").trim();
     }
 }

@@ -1,6 +1,6 @@
 package fr.diginamic.DAO;
 
-import fr.diginamic.entity.Marque;
+import fr.diginamic.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -42,6 +42,32 @@ public class MarqueDAO implements Dao{
             .getResultList().isEmpty();
         em.close();
         return result;
+    }
+    public void linkMarque(int produit_id, int marque_id){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            MarqueProduit ap = new MarqueProduit(marque_id, produit_id);
+            em.persist(ap);
+
+            transaction.commit();
+        } catch (Exception e){}
+        em.close();
+    }
+    public int getIdByName(Marque m){
+        int res = 0;
+        EntityManager em = emf.createEntityManager();
+        try {
+                res = em.createQuery("select m from Marque m where m.nom like :nom", Marque.class)
+                        .setParameter("nom", m.getNom())
+                        .getResultList().get(0).getId();
+            em.close();
+            return res;
+        } catch (Exception e) {
+            em.close();
+            return 0;
+        }
     }
 
     @Override

@@ -27,6 +27,11 @@ public class App {
                 tc.setProduit_id(produit.getId());
                 ConnexionJPA.addTeneurComposition(tc);
             }
+            ConnexionJPA.linkIngredientAndProduit(produitInstancie,produitDTO.getListeIngredient());
+            ConnexionJPA.linkAllergeneAndProduit(produitInstancie,produitDTO.getListeAllergene());
+            ConnexionJPA.linkAdditifAndProduit(produitInstancie,produitDTO.getListeAdditif());
+            ConnexionJPA.linkMarqueAndProduit(produitInstancie, ExtractFromDTO.extractMarqueFromDTO(produitDTO));
+            ConnexionJPA.linkCategorieAndProduit(produitInstancie, ExtractFromDTO.extractCategorieFromDTO(produitDTO));
         }
     }
 }

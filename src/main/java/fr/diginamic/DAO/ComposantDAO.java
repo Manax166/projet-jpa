@@ -29,15 +29,40 @@ public interface ComposantDAO extends Dao {
         transaction.commit();
         em.close();
     }
-    default void linkIngredient(Produit p, Ingredient i){
+    default void linkIngredient(int produit_id, int ingredient_id){
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            IngredientProduit ip = new IngredientProduit(ingredient_id, produit_id);
+            em.persist(ip);
 
-        transaction.begin();
-        IngredientProduit ip = new IngredientProduit(i.getId(), p.getId());
-        em.persist(ip);
+            transaction.commit();
+        } catch (Exception e){}
+        em.close();
+    }
+    default void linkAllergene(int produit_id, int allergene_id){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            AllergeneProduit ap = new AllergeneProduit(allergene_id, produit_id);
+            em.persist(ap);
 
-        transaction.commit();
+            transaction.commit();
+        } catch (Exception e){}
+        em.close();
+    }
+    default void linkAdditif(int produit_id, int additif_id){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            AdditifProduit ap = new AdditifProduit(additif_id, produit_id);
+            em.persist(ap);
+
+            transaction.commit();
+        } catch (Exception e){}
         em.close();
     }
     default Composant getById(Composant c){
