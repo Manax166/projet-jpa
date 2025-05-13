@@ -1,0 +1,25 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+    <persistence-unit name="openFoodFacts">
+
+        <class>fr.diginamic.entity.Ingredient</class>
+        <class>fr.diginamic.entity.Additif</class>
+        <class>fr.diginamic.entity.Allergene</class>
+        <class>fr.diginamic.entity.Produit</class>
+        <class>fr.diginamic.entity.Marque</class>
+        <class>fr.diginamic.entity.MarqueProduit</class>
+        <class>fr.diginamic.entity.IngredientProduit</class>
+        <class>fr.diginamic.entity.AdditifProduit</class>
+        <class>fr.diginamic.entity.AllergeneProduit</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/openFoodFacts"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
