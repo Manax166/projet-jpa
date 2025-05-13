@@ -2,9 +2,6 @@ package fr.diginamic.service;
 
 import fr.diginamic.DAO.*;
 import fr.diginamic.entity.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 import java.util.List;
 
